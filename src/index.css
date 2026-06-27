@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Oxanium";
+  src: url("/fonts/oxanium/Oxanium-700.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Oxanium";
+  src: url("/fonts/oxanium/Oxanium-800.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Envision";
+  src:
+    url("/fonts/Envision.woff") format("woff"),
+    url("/fonts/Envision.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.envision {
+  font-family: Envision;
+}
