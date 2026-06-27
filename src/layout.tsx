@@ -1,15 +1,18 @@
 import { useEffect, useRef, useState } from "react";
-import { NavLink, Outlet } from "react-router";
+import { NavLink, Outlet, useLocation } from "react-router";
 import { cn } from "./lib/utils";
 
 const navItems = [
   { to: "/", label: "Start" },
+  { to: "/FAQ", label: "FAQ" },
   { to: "/Datenschutz", label: "Datenschutz" },
   { to: "/Impressum", label: "Impressum" },
 ];
 
 export default function Layout() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const { pathname } = useLocation();
   const headerRef = useRef<HTMLElement | null>(null);
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
@@ -57,6 +60,50 @@ export default function Layout() {
       document.body.style.overflow = previousOverflow;
     };
   }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 160);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [pathname]);
+
+  const handleScrollToTop = () => {
+    const html = document.documentElement;
+    const body = document.body;
+    const previousHtmlBehavior = html.style.scrollBehavior;
+    const previousBodyBehavior = body.style.scrollBehavior;
+
+    const restoreScrollBehavior = () => {
+      html.style.scrollBehavior = previousHtmlBehavior;
+      body.style.scrollBehavior = previousBodyBehavior;
+      window.removeEventListener("scroll", onScrollEnd);
+    };
+
+    const onScrollEnd = () => {
+      if (window.scrollY <= 0) {
+        restoreScrollBehavior();
+      }
+    };
+
+    html.style.scrollBehavior = "smooth";
+    body.style.scrollBehavior = "smooth";
+    window.addEventListener("scroll", onScrollEnd, { passive: true });
+
+    window.scrollTo({ top: 0 });
+
+    window.setTimeout(restoreScrollBehavior, 1200);
+  };
 
   return (
     <div className="relative flex min-h-screen flex-col bg-linear-to-b from-slate-100 via-blue-50 to-cyan-50 text-slate-800">
@@ -203,6 +250,31 @@ export default function Layout() {
           </NavLink>
         </div>
       </footer>
+
+      <button
+        type="button"
+        onClick={handleScrollToTop}
+        aria-label="Nach oben scrollen"
+        className={cn(
+          "fixed bottom-5 right-5 z-50 inline-flex h-11 w-11 items-center justify-center rounded-full bg-linear-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-600/30 transition-all duration-200 hover:from-blue-700 hover:to-cyan-600",
+          showScrollTop
+            ? "pointer-events-auto translate-y-0 opacity-100"
+            : "pointer-events-none translate-y-3 opacity-0",
+        )}
+      >
+        <svg
+          className="h-5 w-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M12 5v14" />
+          <path d="M6 11l6-6 6 6" />
+        </svg>
+      </button>
     </div>
   );
 }

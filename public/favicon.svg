@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="PhoneDocs Favicon">
+  <defs>
+    <linearGradient id="bg" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2563eb" />
+      <stop offset="1" stop-color="#06b6d4" />
+    </linearGradient>
+  </defs>
+
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="url(#bg)" />
+
+  <rect x="21" y="13" width="22" height="38" rx="5" fill="none" stroke="#ffffff" stroke-width="4" />
+  <rect x="28" y="17" width="8" height="2" rx="1" fill="#ffffff" />
+  <circle cx="32" cy="46" r="2" fill="#ffffff" />
+
+  <path d="M12 14l6 6M18 14l-6 6" stroke="#ffffff" stroke-width="3" stroke-linecap="round" />
+</svg>
