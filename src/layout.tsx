@@ -193,7 +193,7 @@ export default function Layout() {
         <div className="mx-auto flex min-h-[4.2rem] w-full max-w-6xl flex-col items-start justify-between gap-3 px-4 py-4 text-sm text-slate-600 sm:px-6 md:flex-row md:items-center lg:px-8">
           <p>
             <strong className="text-slate-700">PhoneDocs</strong> repariert
-            Smartphones und Tablets praezise, transparent und schnell.
+            Smartphones und Tablets präzise, transparent und schnell.
           </p>
           <NavLink
             to="/Kontakt"
